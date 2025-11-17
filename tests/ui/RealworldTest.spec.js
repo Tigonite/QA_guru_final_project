@@ -6,7 +6,7 @@ import {
     RegisterPage,
     CreateArticlePage,
     EditArticlePage
-} from '../src/pages/index';
+} from '../../src/pages/index';
 
 const URL = 'https://realworld.qa.guru/';
 

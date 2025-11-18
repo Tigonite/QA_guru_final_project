@@ -1,12 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { faker } from '@faker-js/faker';
-import { nanoid } from 'nanoid';
 import {
     MainPage,
     RegisterPage,
     CreateArticlePage,
     EditArticlePage
-} from '../src/pages/index';
+} from '../../src/pages/index';
+import { UserBuilder, ArticleBuilder } from '../../src/helpers/builders/index';
 
 const URL = 'https://realworld.qa.guru/';
 
@@ -17,18 +16,18 @@ test.describe('Тесты для сайта realworld.qa', () => {
     });
 
     test('Создание статьи', async ({ page }) => {
-        const user = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-        };
+        const user = new UserBuilder()
+        .addName()
+        .addEmail()
+        .addPassword()
+        .generate();
         
-        const article = {
-            title: nanoid(10),
-            about: nanoid(15),
-            content: nanoid(30),
-            tag: nanoid(3),
-        };
+        const article = new ArticleBuilder()
+        .addTitle()
+        .addAbout()
+        .addContent()
+        .addTag()
+        .generate();
 
         const mainPage = new MainPage(page);
         const registerPage = new RegisterPage(page);
@@ -42,25 +41,25 @@ test.describe('Тесты для сайта realworld.qa', () => {
     });
 
     test('Редактирование статьи', async ({ page }) => {
-        const user = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-        };
+        const user = new UserBuilder()
+        .addName()
+        .addEmail()
+        .addPassword()
+        .generate();
 
-        const article = {
-            title: nanoid(10),
-            about: nanoid(15),
-            content: nanoid(30),
-            tag: nanoid(3),
-        };
+        const article = new ArticleBuilder()
+        .addTitle()
+        .addAbout()
+        .addContent()
+        .addTag()
+        .generate();
         
-        const articleEdit = {
-            title: faker.book.title(),
-            about: faker.commerce.productName(),
-            content: faker.commerce.productDescription(),
-            tag: faker.word.noun(),
-        };
+        const articleEdit = new ArticleBuilder()
+        .addTitle()
+        .addAbout()
+        .addContent()
+        .addTag()
+        .generate();
         
         const mainPage = new MainPage(page);
         const registerPage = new RegisterPage(page);
@@ -77,18 +76,18 @@ test.describe('Тесты для сайта realworld.qa', () => {
     });
 
     test('Лайк статьи', async ({ page }) => {
-        const user = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-        };
+        const user = new UserBuilder()
+        .addName()
+        .addEmail()
+        .addPassword()
+        .generate();
 
-        const article = {
-            title: nanoid(10),
-            about: nanoid(15),
-            content: nanoid(30),
-            tag: nanoid(3),
-        };
+        const article = new ArticleBuilder()
+        .addTitle()
+        .addAbout()
+        .addContent()
+        .addTag()
+        .generate();
         
         const mainPage = new MainPage(page);
         const registerPage = new RegisterPage(page);
@@ -104,11 +103,11 @@ test.describe('Тесты для сайта realworld.qa', () => {
     });
 
     test('Выход из аккаунта', async ({ page }) => {
-        const user = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-        };
+        const user = new UserBuilder()
+        .addName()
+        .addEmail()
+        .addPassword()
+        .generate();
             
         const mainPage = new MainPage(page);
         const registerPage = new RegisterPage(page);
@@ -121,18 +120,18 @@ test.describe('Тесты для сайта realworld.qa', () => {
     });
 
     test('Поиск статьи по тегу', async ({ page }) => {
-        const user = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-            };
+        const user = new UserBuilder()
+        .addName()
+        .addEmail()
+        .addPassword()
+        .generate();
 
-        const article = {
-            title: nanoid(10),
-            about: nanoid(15),
-            content: nanoid(30),
-            tag: 'реклама',
-        };
+        const article = new ArticleBuilder()
+        .addTitle()
+        .addAbout()
+        .addContent()
+        .addTag("реклама")
+        .generate();
                 
         const mainPage = new MainPage(page);
         const registerPage = new RegisterPage(page);

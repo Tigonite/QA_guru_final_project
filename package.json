@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test_challenger": "npx playwright test --grep @challenger",
+    "test_challenges": "npx playwright test --grep @challenges",
+    "test_todos": "npx playwright test --grep @todos",
+    "test_todos_id": "npx playwright test --grep @todos_id",
+    "test_heartbeat": "npx playwright test --grep @heartbeat",
+    "test": "npx playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tigonite/QA_guru_final_project.git"

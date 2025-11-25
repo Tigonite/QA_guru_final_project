@@ -5,13 +5,13 @@ export class BuilderTodo{
         this.invalidTodoId = Math.floor(Math.random() * 10) + 11;
     }
 
-    addValidTodoId() {
-        this.validTodoId
+    addValidTodoId(id = Math.floor(Math.random() * 10) + 1) {
+        this.data.id = id;
         return this;
     }
 
-    addInvalidTodoId() {
-        this.invalidTodoId;
+    addInvalidTodoId(id = Math.floor(Math.random() * 10) + 11) {
+        this.data.id = id;
         return this;
     }
 

@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { ChallengerService, ChallengesService, TodosService, TodoService, HeartbeatService } from "../../src/services/index";
+import { /*ChallengerService, ChallengesService, TodosService, TodoService, HeartbeatService*/ Api } from "../../src/services/index";
 import { BuilderTodo } from "../../src/helpers/builders/api.builder";
 
 test.describe("Tests for APIchallenge", () => {
     let token
 
     test.beforeAll(async ( { request }, testinfo ) => {
-        const challenger = new ChallengerService(request);
-        let response = await challenger.initialPost(testinfo);
+        const api = new Api(request);
+        let response = await api.challenger.initialPost(testinfo);
         let headers = response.headers();
         token = headers["x-challenger"];
         console.log(`Значение токена: ${token}`);
@@ -16,8 +16,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("02 GET /challenges (200) @challenges", async ( { request }, testinfo ) => {
-        const challenges = new ChallengesService(request);
-        let response = await challenges.getChallengesList(token, testinfo);
+        const api = new Api(request);
+        let response = await api.challenges.getChallengesList(token, testinfo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -28,8 +28,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("03 GET /todos (200) @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        let response = await todos.getTodosList(token, testinfo);
+        const api = new Api(request);
+        let response = await api.todos.getTodosList(token, testinfo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -39,8 +39,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("04 GET /todo (404) @todo", async ( { request }, testinfo ) => {
-        const todo = new TodoService(request);
-        let response = await todo.getTodoList(token, testinfo);
+        const api = new Api(request);
+        let response = await api.todo.getTodoList(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(404);
@@ -49,9 +49,8 @@ test.describe("Tests for APIchallenge", () => {
 
     test("05 GET /todos/{id} (200) @todos", async ( { request }, testinfo ) => {
         const todo_id = new BuilderTodo().validTodoId;
-        const todos = new TodosService(request);
-
-        let response = await todos.getExactTodo(token, testinfo, todo_id);
+        const api = new Api(request);
+        let response = await api.todos.getExactTodo(token, testinfo, todo_id);
         let body = await response.json();
         let headers = response.headers();
         
@@ -62,8 +61,8 @@ test.describe("Tests for APIchallenge", () => {
 
     test("06 GET /todos/{id} (404) @todos", async ( { request }, testinfo ) => {
         const todo_id = new BuilderTodo().invalidTodoId;
-        const todos = new TodosService(request);
-        let response = await todos.getExactTodo(token, testinfo, todo_id);
+        const api = new Api(request);
+        let response = await api.todos.getExactTodo(token, testinfo, todo_id);
         let body = await response.json();
         let headers = response.headers();
 
@@ -73,8 +72,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("07 GET /todos (200) ?filter @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        let response = await todos.getFilteredTodo(token, testinfo);
+        const api = new Api(request);
+        let response = await api.todos.getFilteredTodo(token, testinfo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -84,8 +83,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("08 HEAD /todos (200) @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        let response = await todos.headTodos(token, testinfo);
+        const api = new Api(request);
+        let response = await api.todos.headTodos(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -98,8 +97,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -116,8 +115,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -132,8 +131,8 @@ test.describe("Tests for APIchallenge", () => {
         .addLongTitle()
         .addDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -148,8 +147,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addLongDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -164,8 +163,8 @@ test.describe("Tests for APIchallenge", () => {
         .addMaxTitle()
         .addMaxDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -182,8 +181,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addOverDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -199,8 +198,8 @@ test.describe("Tests for APIchallenge", () => {
         .addDescription()
         .addPriority()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postTodos(token, testinfo, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postTodos(token, testinfo, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -216,8 +215,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -231,8 +230,8 @@ test.describe("Tests for APIchallenge", () => {
         const createTodo = new BuilderTodo()
         .addTitle()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -246,8 +245,8 @@ test.describe("Tests for APIchallenge", () => {
         const createTodo = new BuilderTodo()
         .addTitle()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.postExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.postExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -263,8 +262,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription("bla")
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -280,8 +279,8 @@ test.describe("Tests for APIchallenge", () => {
         const createTodo = new BuilderTodo()
         .addTitle()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -295,8 +294,8 @@ test.describe("Tests for APIchallenge", () => {
         const createTodo = new BuilderTodo()
         .addTitle(null)
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactIdTodo(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -313,8 +312,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate()
-        const todos = new TodosService(request);
-        let response = await todos.putExactId(token, testinfo, todo_id, createTodo);
+        const api = new Api(request);
+        let response = await api.todos.putExactId(token, testinfo, todo_id, createTodo);
         let body = await response.json();
         let headers = response.headers();
 
@@ -326,9 +325,9 @@ test.describe("Tests for APIchallenge", () => {
 
     test("23 DELETE /todos/{id} (200) @todos", async ( { request }, testinfo ) => {
         const todo_id = new BuilderTodo().validTodoId;
-        const todos = new TodosService(request);
-        let response = await todos.delTodo(token, testinfo, todo_id)
-        let re_response = await todos.getExactTodo (token, testinfo, todo_id)
+        const api = new Api(request);
+        let response = await api.todos.delTodo(token, testinfo, todo_id)
+        let re_response = await api.todos.getExactTodo (token, testinfo, todo_id)
         let body = await re_response.json();
         let headers = re_response.headers();
 
@@ -338,8 +337,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("24 OPTIONS /todos (200) @todos", async ({ request }, testinfo) => {
-        const todos = new TodosService(request);
-        const response = await todos.optionsTodo(token, testinfo)
+        const api = new Api(request);
+        const response = await api.todos.optionsTodo(token, testinfo)
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -353,8 +352,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("25 GET /todos (200) XML @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getXmlBody(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getXmlBody(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -363,8 +362,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("26 GET /todos (200) JSON @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getJsonBody(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getJsonBody(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -373,8 +372,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("27 GET /todos (200) ANY @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getAnyBody(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getAnyBody(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -383,8 +382,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("28 GET /todos (200) XML pref @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getXmlPrefBody(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getXmlPrefBody(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -393,8 +392,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("29 GET /todos (200) no accept @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getTodosList(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getTodosList(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(200);
@@ -403,8 +402,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("30 GET /todos (406) @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.getInvalidFormat(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.getInvalidFormat(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(406);
@@ -413,8 +412,8 @@ test.describe("Tests for APIchallenge", () => {
     });
 
     test("31 POST /todos XML @todos", async ( { request }, testinfo ) => {
-        const todos = new TodosService(request);
-        const response = await todos.postXmlData(token, testinfo);
+        const api = new Api(request);
+        const response = await api.todos.postXmlData(token, testinfo);
         let headers = response.headers();
 
         expect(response.status()).toBe(201);
@@ -428,8 +427,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate();
-        const todos = new TodosService(request);
-        const response = await todos.postJson(token, testinfo, createTodo);
+        const api = new Api(request);
+        const response = await api.todos.postJson(token, testinfo, createTodo);
         let headers = response.headers();
 
         expect(response.status()).toBe(201);
@@ -443,8 +442,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate();
-        const todos = new TodosService(request);
-        const response = await todos.postInvalidFormat(token, testinfo, createTodo);
+        const api = new Api(request);
+        const response = await api.todos.postInvalidFormat(token, testinfo, createTodo);
         let headers = response.headers();
 
         expect(response.status()).toBe(415);
@@ -458,8 +457,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate();
-        const heartbeat = new HeartbeatService(request);
-        const response = await heartbeat.deleteHeartbeat(token, testinfo, createTodo);
+        const api = new Api(request);
+        const response = await api.heartbeat.deleteHeartbeat(token, testinfo, createTodo);
         let headers = response.headers();
 
         expect(response.status()).toBe(405);
@@ -473,8 +472,8 @@ test.describe("Tests for APIchallenge", () => {
         .addTitle()
         .addDescription()
         .generate();
-        const heartbeat = new HeartbeatService(request);
-        const response = await heartbeat.patchHeartbeat(token, testinfo, createTodo);
+        const api = new Api(request);
+        const response = await api.heartbeat.patchHeartbeat(token, testinfo, createTodo);
         let headers = response.headers();
 
         expect(response.status()).toBe(500);
@@ -485,9 +484,9 @@ test.describe("Tests for APIchallenge", () => {
     test("58 DELETE /todos/{id} (200) all @todos", async ( { request }, testinfo ) => {
         let todo_id = 1;
         let response
-        const todos = new TodosService(request);
+        const api = new Api(request);
         while (todo_id <= 10) {
-            response = await todos.delAllTodos(token, testinfo, todo_id);
+            response = await api.todos.delAllTodos(token, testinfo, todo_id);
             todo_id += 1;
         };
         let headers = response.headers();

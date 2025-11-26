@@ -1,10 +1,5 @@
 import { test, expect } from '@playwright/test';
-import {
-    MainPage,
-    RegisterPage,
-    CreateArticlePage,
-    EditArticlePage
-} from '../../src/pages/index';
+import { App } from '../../src/pages/index';
 import { UserBuilder, ArticleBuilder } from '../../src/helpers/builders/index';
 
 const URL = 'https://realworld.qa.guru/';
@@ -29,15 +24,13 @@ test.describe('Тесты для сайта realworld.qa', () => {
         .addTag()
         .generate();
 
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
-        const articlePage = new CreateArticlePage(page);
+        const app = new App(page);
 
-        await mainPage.gotoRegister();
-        await registerPage.registerUser(user);
-        await articlePage.createNew(article);
+        await app.main.gotoRegister();
+        await app.register.registerUser(user);
+        await app.create.createNew(article);
         
-        await expect(articlePage.checkArticle).toContainText(article.title);
+        await expect(app.create.checkArticle).toContainText(article.title);
     });
 
     test('Редактирование статьи', async ({ page }) => {
@@ -61,18 +54,14 @@ test.describe('Тесты для сайта realworld.qa', () => {
         .addTag()
         .generate();
         
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
-        const createArticlePage = new CreateArticlePage(page);
-        const editArticlePage = new EditArticlePage(page);
+        const app = new App(page);
 
-
-        await mainPage.gotoRegister();
-        await registerPage.registerUser(user);
-        await createArticlePage.createNew(article);
-        await editArticlePage.editCreated(articleEdit);
+        await app.main.gotoRegister();
+        await app.register.registerUser(user);
+        await app.create.createNew(article);
+        await app.edit.editCreated(articleEdit);
         
-        await expect(editArticlePage.checkArticle).toContainText(articleEdit.title);
+        await expect(app.edit.checkArticle).toContainText(articleEdit.title);
     });
 
     test('Лайк статьи', async ({ page }) => {
@@ -89,17 +78,15 @@ test.describe('Тесты для сайта realworld.qa', () => {
         .addTag()
         .generate();
         
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
-        const createArticlePage = new CreateArticlePage(page);
+        const app = new App(page);
+        
+        await app.main.gotoRegister();
+        await app.register.registerUser(user);
+        await app.create.createNew(article);
+        await app.main.goHome();
+        await app.main.likeArticle();
 
-        await mainPage.gotoRegister();
-        await registerPage.registerUser(user);
-        await createArticlePage.createNew(article);
-        await mainPage.goHome();
-        await mainPage.likeArticle();
-
-        await expect(mainPage.checkLike).toBeVisible();
+        await expect(app.main.checkLike).toBeVisible();
     });
 
     test('Выход из аккаунта', async ({ page }) => {
@@ -109,14 +96,13 @@ test.describe('Тесты для сайта realworld.qa', () => {
         .addPassword()
         .generate();
             
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
+        const app = new App(page);
     
-        await mainPage.gotoRegister();
-        await registerPage.registerUser(user);
-        await mainPage.logout();
+        await app.main.gotoRegister();
+        await app.register.registerUser(user);
+        await app.main.logout();
             
-        await expect(mainPage.loginLink).toBeVisible();
+        await expect(app.main.loginLink).toBeVisible();
     });
 
     test('Поиск статьи по тегу', async ({ page }) => {
@@ -133,16 +119,14 @@ test.describe('Тесты для сайта realworld.qa', () => {
         .addTag("реклама")
         .generate();
                 
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
-        const createArticlePage = new CreateArticlePage(page);
+        const app = new App(page);
         
-        await mainPage.gotoRegister();
-        await registerPage.registerUser(user);
-        await createArticlePage.createNew(article);
-        await mainPage.goHome();
-        await mainPage.gotoSearch();
+        await app.main.gotoRegister();
+        await app.register.registerUser(user);
+        await app.create.createNew(article);
+        await app.main.goHome();
+        await app.main.gotoSearch();
                 
-        await expect(mainPage.tag).toBeVisible();
+        await expect(app.main.tag).toBeVisible();
     });
 });

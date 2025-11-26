@@ -1,12 +1,6 @@
-import { 
-    ChallengerService,
-    ChallengesService,
-    HeartbeatService,
-    TodoService,
-    TodosService
-} from "./index";
+import { ChallengerService, ChallengesService, HeartbeatService, TodoService, TodosService } from "./index";
 
-export class ApiService {
+export class Api {
     constructor(request) {
         this.request = request;
         this.challenger = new ChallengerService(request);

@@ -9,7 +9,10 @@
     "test_todos": "npx playwright test --grep @todos",
     "test_todos_id": "npx playwright test --grep @todos_id",
     "test_heartbeat": "npx playwright test --grep @heartbeat",
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "testUI": "npx playwright test --ui",
+    "report": "npx playwright show-report",
+    "allureFile": "npx allure awesome ./allure-results  --single-file"
   },
   "repository": {
     "type": "git",

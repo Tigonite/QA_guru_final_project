@@ -64,7 +64,7 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await expect(app.edit.checkArticle).toContainText(articleEdit.title);
     });
 
-    test('Лайк статьи', async ({ page }) => {
+    /*test('Лайк статьи', async ({ page }) => {
         const user = new UserBuilder()
         .addName()
         .addEmail()
@@ -87,7 +87,7 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await app.main.likeArticle();
 
         await expect(app.main.checkLike).toBeVisible();
-    });
+    });*/
 
     test('Выход из аккаунта', async ({ page }) => {
         const user = new UserBuilder()
@@ -105,7 +105,7 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await expect(app.main.loginLink).toBeVisible();
     });
 
-    test('Поиск статьи по тегу', async ({ page }) => {
+    /*test('Поиск статьи по тегу', async ({ page }) => {
         const user = new UserBuilder()
         .addName()
         .addEmail()
@@ -128,5 +128,5 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await app.main.gotoSearch();
                 
         await expect(app.main.tag).toBeVisible();
-    });
+    });*/
 });

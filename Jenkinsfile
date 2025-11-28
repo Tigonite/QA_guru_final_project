@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('e2e-tests') { 
         steps {
-            nodejs('NodeJS2290'){
+            nodejs('NodeJS24101'){
             sh 'npm ci'
             sh 'npx playwright install --with-deps'
             sh 'npx playwright test'

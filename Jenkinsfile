@@ -5,7 +5,7 @@ pipeline {
         steps {
             nodejs('NodeJS2290'){
             sh 'npm ci'
-            sh 'npm playwright install --with-deps'
+            sh 'npx playwright install --with-deps'
             sh 'npx playwright test'
          }
         }

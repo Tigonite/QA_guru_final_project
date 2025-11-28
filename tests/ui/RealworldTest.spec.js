@@ -87,7 +87,7 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await app.main.likeArticle();
 
         await expect(app.main.checkLike).toBeVisible();
-    });*/
+    });
 
     test('Выход из аккаунта', async ({ page }) => {
         const user = new UserBuilder()

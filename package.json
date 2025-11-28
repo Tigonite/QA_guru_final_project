@@ -28,7 +28,8 @@
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "allure-playwright": "^3.4.2"
   },
   "dependencies": {
     "nanoid": "^5.1.6"

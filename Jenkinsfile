@@ -15,7 +15,6 @@ pipeline {
             allure([
                 results: [[path: 'allure-report']]
                   ])
-            )
          }
       }
    }

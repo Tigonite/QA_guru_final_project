@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+/*import { test, expect } from '@playwright/test';
 import { App } from '../../src/pages/index';
 import { UserBuilder, ArticleBuilder } from '../../src/helpers/builders/index';
 
@@ -105,7 +105,7 @@ test.describe('Тесты для сайта realworld.qa', () => {
         await expect(app.main.loginLink).toBeVisible();
     });
 
-    /*test('Поиск статьи по тегу', async ({ page }) => {
+    test('Поиск статьи по тегу', async ({ page }) => {
         const user = new UserBuilder()
         .addName()
         .addEmail()

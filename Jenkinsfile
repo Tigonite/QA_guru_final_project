@@ -14,7 +14,7 @@ pipeline {
          steps {
             allure(
                [
-                  reportBuildPolicy: 'ALWAYS'
+                  reportBuildPolicy:'ALWAYS'
                   results:[[ path:'allure-results']]
                ]
             )

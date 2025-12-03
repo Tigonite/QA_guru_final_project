@@ -14,8 +14,8 @@
 
 ### Объекты тестирования
 
-- **realworld.qa.guru** — веб-приложение для практики UI тестирования
-- **apichallenges.eviltester.com** — RESTful API для отработки навыков API тестирования
+- **RealworldTest.spec** — веб-приложение для практики UI тестирования
+- **challenge.spec** — RESTful API для отработки навыков API тестирования
 
 ## Технологический стек
 
@@ -36,8 +36,8 @@
 
 ```bash
 # Клонирование репозитория
-git clone https://github.com/olgamoiseeva1996/QA-GURU-PW-DIPLOM.git
-cd QA-GURU-PW-DIPLOM
+git clone https://github.com/Tigonite/QA_guru_final_project.git
+cd QA_guru_final_project
 
 # Установка зависимостей
 npm install

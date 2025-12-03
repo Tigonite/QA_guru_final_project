@@ -26,12 +26,17 @@
   },
   "homepage": "https://github.com/Tigonite/QA_guru_final_project#readme",
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1",
-    "allure-playwright": "^3.4.2"
+    "allure-playwright": "^3.4.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0"
   },
   "dependencies": {
+    "eslint-config-prettier": "^10.1.8",
     "nanoid": "^5.1.6"
   }
 }

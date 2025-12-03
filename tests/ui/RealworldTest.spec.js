@@ -1,4 +1,4 @@
-/*import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { App } from '../../src/pages/index';
 import { UserBuilder, ArticleBuilder } from '../../src/helpers/builders/index';
 
@@ -129,4 +129,4 @@ test.describe('Тесты для сайта realworld.qa', () => {
                 
         await expect(app.main.tag).toBeVisible();
     });
-});*/
+});

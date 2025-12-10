@@ -29,13 +29,4 @@ export class CreateArticlePage {
         await this.publishButton.click();
     }
 
-    /*async editCreated(articleEdit) {    
-        const { title } = articleEdit;
-        
-        await this.editArticleButton.click();
-        await this.titleInput.click();
-        await this.titleInput.fill('');
-        await this.titleInput.fill(title);
-        await this.updateButton.click();
-    }*/
 }

@@ -2,12 +2,10 @@ import { test, expect } from '@playwright/test';
 import { App } from '../../src/pages/index';
 import { UserBuilder, ArticleBuilder } from '../../src/helpers/builders/index';
 
-const URL = 'https://realworld.qa.guru/';
-
 test.describe('Тесты для сайта realworld.qa', () => {
     
-    test.beforeEach(async ({ page }) => {
-        await page.goto(URL);
+    test.beforeEach(async ({ page }, testinfo) => {
+        await page.goto(testinfo.project.use.appURL);
     });
 
     test('Создание статьи', async ({ page }) => {

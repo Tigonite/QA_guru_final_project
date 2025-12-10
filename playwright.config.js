@@ -37,6 +37,7 @@ export default defineConfig({
     navigationTimeout: 15 * 1000, // 15 секунд на переходы (page.goto)
     expectTimeout: 5 * 1000, // 5 секунд на ожидания (expect)
     apiURL: "https://apichallenges.eviltester.com",
+    appURL: "https://realworld.qa.guru/"
   },
 
   /* Configure projects for major browsers */
